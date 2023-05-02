@@ -3,6 +3,7 @@
  */
 package test;
 
+import org.bson.Document;
 import test.services.database.MongoDb;
 
 public class App {
@@ -11,13 +12,17 @@ public class App {
         try {
             init();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.print(e.getMessage());
+        }
+
+        Document[] docs = MongoDb.findAllInCollection("test");
+        for (Document doc: docs) {
+            System.out.println(doc.toJson());
         }
     }
 
     private static void init() throws Exception {
         MongoDb.init();
-        System.out.println("Connected to database successfully");
-
+        System.out.println("\nConnected to database successfully\n");
     }
 }
